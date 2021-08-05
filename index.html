@@ -62,8 +62,30 @@
 			Paddle.Checkout.open({
 				product: 13941,
 				successCallback: function (data) {
-					console.log(data);
-					dataLayer.push({ event: "checkoutSuccess" });
+					dataLayer.push({
+						event: "purchase",
+						ecommerce: {
+							currencyCode: data.checkout.prices.customer.currency,
+							purchase: {
+								actionField: {
+									id: data.checkout.id,
+									affiliation: "Store Example",
+									revenue: data.checkout.prices.customer.total,
+									tax: data.checkout.prices.customer.total_tax,
+									coupon: data.checkout.coupon.coupon_code,
+								},
+								products: [
+									{
+										name: data.product.name,
+										id: data.product.id,
+										price: data.checkout.prices.customer.total,
+										brand: "GA Test",
+										quantity: data.product.quantity,
+									},
+								],
+							},
+						},
+					});
 				},
 				closeCallback: function (data) {
 					dataLayer.push({ event: "checkoutClose" });
