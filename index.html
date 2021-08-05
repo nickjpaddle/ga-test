@@ -62,6 +62,7 @@
 			Paddle.Checkout.open({
 				product: 13941,
 				successCallback: function (data) {
+					console.log(data);
 					dataLayer.push({ event: "checkoutSuccess" });
 				},
 				closeCallback: function (data) {
