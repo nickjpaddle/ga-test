@@ -62,8 +62,10 @@
 			Paddle.Checkout.open({
 				product: 13941,
 				successCallback: function (data) {
+					dataLayer.push({ ecommerce: null });
 					dataLayer.push({
 						event: "purchase",
+						campaign: "Solutions Architect Challenge",
 						ecommerce: {
 							currencyCode: data.checkout.prices.customer.currency,
 							purchase: {
